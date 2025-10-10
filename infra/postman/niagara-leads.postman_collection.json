@@ -1,0 +1,37 @@
+{
+  "info": {
+    "name": "Niagara Leads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Ping",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/ping"
+      }
+    },
+    {
+      "name": "Lead Intake",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{origin}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Alex\",\n  \"last_name\": \"Driver\",\n  \"email\": \"alex@example.com\",\n  \"phone\": \"+15555551234\",\n  \"finance\": { \"income_band\": \"mid\", \"down_payment\": 1000 },\n  \"utm\": { \"source\": \"fb\", \"medium\": \"cpc\" }\n}"
+        },
+        "url": "{{baseUrl}}/api/lead"
+      }
+    },
+    {
+      "name": "Redirect",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/go?offer=credit&lead_id={{lead_id}}&utm_source=fb&utm_medium=cpc"
+      }
+    }
+  ]
+}
