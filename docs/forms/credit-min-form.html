@@ -1,0 +1,122 @@
+ <!doctype html>
+ <html lang="en">
+   <head>
+     <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <title>Credit Lead — Minimal Form</title>
+     <style>
+       body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem}
+       fieldset{border:1px solid #ddd;padding:1rem;margin-bottom:1rem}
+       label{display:block;margin:.5rem 0 .25rem}
+       input,select{width:100%;padding:.5rem;border:1px solid #ccc;border-radius:4px}
+       .row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+       .hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+       button{background:#111;color:#fff;border:0;border-radius:6px;padding:.75rem 1rem;cursor:pointer}
+     </style>
+   </head>
+   <body>
+     <h1>Pre‑Approval (No Credit Pull)</h1>
+     <p>Submit your info to get pre‑approved. No hard credit check. By submitting you agree to be contacted.</p>
+     <form method="POST" action="/api/lead">
+       <fieldset>
+         <legend>Contact</legend>
+         <div class="row">
+           <div>
+             <label for="first_name">First name</label>
+             <input id="first_name" name="first_name" required />
+           </div>
+           <div>
+             <label for="last_name">Last name</label>
+             <input id="last_name" name="last_name" required />
+           </div>
+         </div>
+         <div class="row">
+           <div>
+             <label for="email">Email</label>
+             <input id="email" name="email" type="email" />
+           </div>
+           <div>
+             <label for="phone">Phone</label>
+             <input id="phone" name="phone" />
+           </div>
+         </div>
+         <div class="row">
+           <div>
+             <label for="city">City</label>
+             <input id="city" name="city" />
+           </div>
+           <div>
+             <label for="postal_code">Postal code</label>
+             <input id="postal_code" name="postal_code" pattern="[A-Za-z]\d[A-Za-z][ ]?\d[A-Za-z]\d" />
+           </div>
+         </div>
+       </fieldset>
+
+       <fieldset>
+         <legend>Vehicle Interest</legend>
+         <div class="row">
+           <div>
+             <label for="vehicle_interest[make]">Make</label>
+             <input id="vehicle_interest[make]" name="vehicle_interest[make]" />
+           </div>
+           <div>
+             <label for="vehicle_interest[model]">Model</label>
+             <input id="vehicle_interest[model]" name="vehicle_interest[model]" />
+           </div>
+         </div>
+       </fieldset>
+
+       <fieldset>
+         <legend>Finance</legend>
+         <div class="row">
+           <div>
+             <label for="finance[down_payment]">Down payment (CAD)</label>
+             <input id="finance[down_payment]" name="finance[down_payment]" type="number" min="0" step="1" />
+           </div>
+           <div>
+             <label for="finance[income_band]">Income band</label>
+             <select id="finance[income_band]" name="finance[income_band]">
+               <option value="">Select…</option>
+               <option>low</option>
+               <option>medium</option>
+               <option>high</option>
+             </select>
+           </div>
+         </div>
+         <div>
+           <label for="finance[credit_band]">Credit band</label>
+           <select id="finance[credit_band]" name="finance[credit_band]">
+             <option value="">Select…</option>
+             <option>poor</option>
+             <option>fair</option>
+             <option>good</option>
+             <option>excellent</option>
+           </select>
+         </div>
+       </fieldset>
+
+       <fieldset>
+         <legend>Consent</legend>
+         <label>
+           <input type="checkbox" name="consent" value="on" required />
+           I agree to be contacted by phone, SMS, or email. No credit pull.
+         </label>
+         <input type="hidden" name="consent_copy" value="I agree to be contacted by phone, SMS, or email. No credit pull." />
+       </fieldset>
+
+       <!-- Honeypot -->
+       <div class="hp">
+         <label for="website">Website</label>
+         <input id="website" name="website" />
+       </div>
+
+       <!-- Optional UTMs (can be populated by JS) -->
+       <input type="hidden" name="utm_source" value="website" />
+       <input type="hidden" name="utm_medium" value="form" />
+
+       <button type="submit">Submit</button>
+     </form>
+
+     <p style="margin-top:1rem;color:#666">Note: This static form posts to the running app at <code>/api/lead</code>. Ensure ALLOWED_ORIGINS allows the domain serving this file.</p>
+   </body>
+ </html>
