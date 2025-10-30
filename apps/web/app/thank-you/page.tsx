@@ -1,3 +1,4 @@
+/* eslint react/no-unescaped-entities: 0 */
 import Link from 'next/link';
 
 export const metadata = {

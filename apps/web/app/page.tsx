@@ -1,3 +1,4 @@
+/* eslint react/no-unescaped-entities: 0 */
 import Link from 'next/link';
 
 export default function HomePage() {

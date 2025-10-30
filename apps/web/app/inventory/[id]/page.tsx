@@ -56,7 +56,7 @@ const vehicleData: Record<string, any> = {
   },
 };
 
-export default function VehicleDetailPage({ params, searchParams = {} }: Props) {
+export default function VehicleDetailPage({ params }: Props) {
   const vehicle = vehicleData[params.id] || vehicleData['1'];
 
   return (
