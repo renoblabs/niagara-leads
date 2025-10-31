@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import ConsentGate from '../components/ConsentGate';
+import AnalyticsScripts from '../components/AnalyticsScripts';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: 'Niagara Auto Finder - Get Pre-Approved for Your Next Car',
@@ -70,7 +73,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           .badge-icon { font-size: 2rem; margin-bottom: 0.5rem; }
         `}</style>
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ConsentGate>
+          <AnalyticsScripts />
+        </ConsentGate>
+        <Analytics />
+      </body>
     </html>
   );
 }
