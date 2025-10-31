@@ -5,6 +5,11 @@ on:
     branches:
       - docs/brainstorm-spec
       - main
+  pull_request:
+    branches:
+      - docs/brainstorm-spec
+      - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -38,10 +43,12 @@ jobs:
         run: npm i -g vercel@latest
 
       - name: Pull Vercel env (production)
+        if: github.event_name != 'pull_request'
         run: vercel pull --yes --environment=production --token "$VERCEL_TOKEN" --cwd apps/web
 
       - name: Build (Vercel)
-        run: vercel build --prod --token "$VERCEL_TOKEN" --cwd apps/web
+        run: vercel build --token "$VERCEL_TOKEN" --cwd apps/web ${{ github.event_name != 'pull_request' && '--prod' || '' }}
 
       - name: Deploy (Vercel prebuilt)
+        if: github.event_name != 'pull_request'
         run: vercel deploy --prebuilt --prod --token "$VERCEL_TOKEN" --cwd apps/web
